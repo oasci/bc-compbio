@@ -20,4 +20,12 @@ TODO:
 
     Joint program with [Carnegie Mellon University](../cmu).
 
+## Ph.D. in Molecular Biophysics and Structural Biology
+
+**Website:** [www.mbsb.pitt.edu/](https://www.mbsb.pitt.edu/)
+
+!!! important
+
+    Joint program with [Carnegie Mellon University](../cmu).
+
 TODO:
