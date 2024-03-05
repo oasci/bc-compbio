@@ -63,13 +63,6 @@ plugins:
   - autorefs
   - material-plausible
   - table-reader
-  - mkdocstrings:
-      handlers:
-        python:
-          paths: ["python-bc"]
-          options:
-            annotations_path: brief
-            docstring_style: google
   - mkdocs-jupyter:
         no_input: False
         include_requirejs: true
@@ -92,7 +85,7 @@ extra:
   generator: false
   analytics:
     provider: plausible
-    domain: python.oasci.org
+    domain: compbio.oasci.org
   social:
     - icon: fontawesome/brands/gitlab
       link: https://gitlab.com/oasci
