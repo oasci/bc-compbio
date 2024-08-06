@@ -1,3 +1,4 @@
 nav:
     - Home: index.md
+    - About: about
     - Universities: universities

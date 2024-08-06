@@ -6,26 +6,41 @@ CONDA_NAME := $(PACKAGE_NAME)-dev
 CONDA := conda run -n $(CONDA_NAME)
 CONDA_LOCK_OPTIONS := -p linux-64 --channel conda-forge
 
+all:
+	@echo "Available targets:"
+	@echo "  environment : Install conda environment named $(CONDA_NAME) with dependencies"
+	@echo "  locks       : Fresh install conda environment and rewrite lock files"
+	@echo "  serve       : Serve website documentation that watches and rebuilds on file changes"
+	@echo "  docs        : Build static website files in public/"
+	@echo "  help        : Display this help message"
+
+help: all
+
 ###   ENVIRONMENT   ###
 
 # See https://github.com/pypa/pip/issues/7883#issuecomment-643319919
-export PYTHON_KEYRING_BACKEND := keyring.backends.null.Keyring
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 
 .PHONY: conda-create
 conda-create:
-	- conda deactivate
-	conda remove -y -n $(CONDA_NAME) --all
-	conda create -y -n $(CONDA_NAME)
-	$(CONDA) conda install -y -c conda-forge python=$(PYTHON_VERSION)
-	$(CONDA) conda install -y conda-lock
+	@ echo "Initializing conda environment: $(CONDA_NAME)"
+	@ echo -n "Preparing ... "
+	@- conda deactivate
+	@ conda remove -y -n $(CONDA_NAME) --all
+	@ conda create -y -n $(CONDA_NAME)
+	@ echo "done."
+	@ echo -n "Installing core dependencies ... "
+	@ $(CONDA) conda install -y -c conda-forge python=$(PYTHON_VERSION)
+	@ $(CONDA) conda install -y conda-lock
 
 # Default packages that we always need.
 .PHONY: conda-setup
 conda-setup:
-	$(CONDA) conda install -y -c conda-forge poetry
-	$(CONDA) conda install -y -c conda-forge pre-commit
-	$(CONDA) conda install -y -c conda-forge tomli tomli-w
-	$(CONDA) conda install -y -c conda-forge conda-poetry-liaison
+	@ $(CONDA) conda install -y conda-forge::setuptools
+	@ $(CONDA) conda install -y conda-forge::poetry
+	@ $(CONDA) conda install -y conda-forge::pre-commit
+	@ $(CONDA) conda install -y conda-forge::conda-poetry-liaison
+	@ echo -n "done."
 
 # Conda-only packages specific to this project.
 .PHONY: conda-dependencies
@@ -73,11 +88,12 @@ locks: conda-create conda-setup conda-dependencies conda-lock pre-commit-install
 
 .PHONY: validate
 validate:
-	$(CONDA) markdownlint-cli2-fix biosc1540/*
-	$(CONDA) pre-commit run --all-files
+	- $(CONDA) markdownlint-cli2 "**/*.{md,markdown}" --config .markdownlint.yaml
+	- $(CONDA) pre-commit run --all-files
 
 .PHONY: formatting
 formatting:
+	- $(CONDA) markdownlint-cli2 "**/*.{md,markdown}" --fix --config .markdownlint.yaml
 	- $(CONDA) isort --settings-path pyproject.toml ./
 	- $(CONDA) black --config pyproject.toml ./
 

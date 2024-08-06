@@ -32,8 +32,6 @@ theme:
     repo: fontawesome/brands/gitlab
     annotation: material/star-four-points-circle
   features:
-    # - content.action.edit
-    # - content.action.view
     - content.code.annotate
     - content.code.copy
     - content.code.select
@@ -60,32 +58,27 @@ validation:
 # Options need to be indented twice for some reason?
 plugins:
   - search
-  - autorefs
   - material-plausible
   - table-reader
-  - mkdocs-jupyter:
-        no_input: False
-        include_requirejs: true
-        include_source: True
-        remove_tag_config:
-            remove_input_tags:
-                - hide_code
   - awesome-pages:
         collapse_single_pages: true
         strict: false
         order: asc
         sort_type: natural
         order_by: title
-
-hooks:
-  - hooks/launchy.py
-colab_base_url: https://colab.research.google.com/github/oasci/python-bc/blob/main/docs
+  - glightbox
+  - macros
+  - print-site
+  - git-revision-date-localized:
+      type: iso_datetime
+      timezone: America/Detroit
+      fallback_to_build_date: true
 
 extra:
   generator: false
   analytics:
     provider: plausible
-    domain: compbio.oasci.org
+    domain: compbio.crumblearn.org
   social:
     - icon: fontawesome/brands/gitlab
       link: https://gitlab.com/oasci
@@ -100,11 +93,9 @@ extra_css:
   - css/base.css
   - css/colors.css
   - css/progress.css
-  - css/launchy.css
 
 extra_javascript:
   - js/mathjax.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:
