@@ -131,4 +131,4 @@ This interdisciplinary communication is equally essential in physics, where the 
 
 Some of this content is adapted from the following resources.
 
--   Stewart, T. C. (2005) Notes for the development of a Philosophy of Computational Modeling. *Carleton University Cognitive Science Technical Report*. uri: [https://carleton.ca/cognitivescience/research/technical-reports/view-reports/](https://carleton.ca/cognitivescience/research/technical-reports/view-reports/)
+-   Stewart, T. C. (2005) Notes for the development of a Philosophy of Computational Modeling. *Carleton University Cognitive Science Technical Report*. uri: [https://carleton.ca/cognitivescience/wp-content/uploads/2005-04.pdf](https://carleton.ca/cognitivescience/wp-content/uploads/2005-04.pdf)
